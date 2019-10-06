@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/abusyafiq/Code/react-native/DW12EQIEG_todolist/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "/home/abusyafiq/.gradle/caches/transforms-2/files-2.1/f6914cf091e977c719dd73e806513e7e/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}
