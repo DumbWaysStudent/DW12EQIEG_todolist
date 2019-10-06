@@ -15,6 +15,8 @@ class App extends Component {
 
         this.state = {
             text: "",
+            update: false,
+            updateKey: "",
             tasks: [
                 { key: "work", done: false },
                 { key: "swim", done: true },
@@ -73,6 +75,29 @@ class App extends Component {
         }))
     }
 
+    handleUpdate(key) {
+        this.setState({
+            update: !this.state.update,
+            updateKey: key
+        })
+        this.handleChange(key)
+    }
+
+    updateTask() {
+        alert(this.state.updateKey)
+        if (this.state.text !== "") {
+            this.setState(({ taks }) => ({
+                tasks: this.state.tasks.map(task => {
+                    if (task.key === this.state.updateKey) {
+                        // alert("updated")
+                        return task
+                    }
+                    return task
+                })
+            }))
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -85,11 +110,27 @@ class App extends Component {
                             this.handleChange(text)
                         }}
                     />
-                    <Button
+                    {this.state.update === true ? (
+                        <Button
+                            style={styles.button}
+                            // onPress={this.updateTask}
+                            title="update"
+                        />
+                    ) : (
+                        <Button
+                            style={styles.button}
+                            onPress={this.handleAdd}
+                            title="add"
+                            color="green"
+                        />
+                    )}
+
+                    {/* <Button
                         style={styles.button}
                         onPress={this.handleAdd}
                         title="add"
-                    />
+                        color="green"
+                    /> */}
                     {/* <Icon name="trash" /> */}
                 </View>
                 <FlatList
@@ -103,14 +144,14 @@ class App extends Component {
                             <Text style={styles.item}>{item.key}</Text>
                             <Button
                                 style={styles.button}
-                                onPress={() => this.handleDelete(item.key)}
-                                title="delete"
-                                color="darkred"
+                                onPress={() => this.handleUpdate(item.key)}
+                                title="Update"
                             />
                             <Button
                                 style={styles.button}
                                 onPress={() => this.handleDelete(item.key)}
-                                title="Update"
+                                title="delete"
+                                color="darkred"
                             />
                         </View>
                     )}
