@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Oct 06 11:50:01 WIB 2019
+#Sun Oct 06 13:39:02 WIB 2019
 56.path=lib/x86_64/libjsijniprofiler.so
 5.base=/home/abusyafiq/Code/react-native/DW12EQIEG_todolist/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/home/abusyafiq/Code/react-native/DW12EQIEG_todolist/android/app/build/intermediates/transforms/mergeJniLibs/debug/0

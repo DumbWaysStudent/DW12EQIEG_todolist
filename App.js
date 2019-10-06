@@ -1,13 +1,12 @@
 import React, { Component } from "react"
-// import Icon from "react-native-vector-icons/Ionicons"
 import {
     StyleSheet,
     View,
-    Text,
     TextInput,
     TouchableOpacity,
     FlatList,
-    Button
+    Button,
+    Text
 } from "react-native"
 
 class App extends Component {
@@ -24,7 +23,7 @@ class App extends Component {
                 { key: "run", done: false }
             ]
         }
-        this.handleOnClick = this.handleOnClick.bind(this)
+        this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
@@ -38,7 +37,7 @@ class App extends Component {
         })
     }
 
-    handleOnClick() {
+    handleAdd() {
         // alert(this.state.text);
         if (this.state.text !== "") {
             const newTask = { key: this.state.text, done: false }
@@ -50,6 +49,12 @@ class App extends Component {
         // alert(this.state.tasks);
 
         // alert('clicked');
+    }
+
+    handleDelete(key) {
+        this.setState({
+            tasks: this.state.tasks.filter(task => task.key !== key)
+        })
     }
 
     render() {
@@ -66,16 +71,21 @@ class App extends Component {
                     />
                     <Button
                         style={styles.button}
-                        onPress={this.handleOnClick}
+                        onPress={this.handleAdd}
                         title="add"
                     />
+                    {/* <Icon name="trash" /> */}
                 </View>
                 <FlatList
                     data={this.state.tasks}
                     renderItem={({ item }) => (
                         <View>
                             <Text style={styles.item}>{item.key}</Text>
-                            {/* <Button title="del" /> */}
+                            <Button
+                                style={styles.button}
+                                onPress={() => this.handleDelete(item.key)}
+                                title="delete"
+                            />
                             {/* <Button title="update" /> */}
                         </View>
                     )}

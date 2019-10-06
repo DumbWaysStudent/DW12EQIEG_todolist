@@ -1,4 +1,4 @@
-#Sun Oct 06 11:50:00 WIB 2019
+#Sun Oct 06 13:39:01 WIB 2019
 base.0=/home/abusyafiq/Code/react-native/DW12EQIEG_todolist/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
