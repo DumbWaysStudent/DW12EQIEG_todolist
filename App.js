@@ -3,10 +3,10 @@ import {
     StyleSheet,
     View,
     TextInput,
-    TouchableOpacity,
     FlatList,
     Button,
-    Text
+    Text,
+    CheckBox
 } from "react-native"
 
 class App extends Component {
@@ -17,9 +17,9 @@ class App extends Component {
             text: "",
             tasks: [
                 { key: "work", done: false },
-                { key: "swim", done: false },
+                { key: "swim", done: true },
                 { key: "study", done: false },
-                { key: "sleep", done: false },
+                { key: "sleep", done: true },
                 { key: "run", done: false }
             ]
         }
@@ -56,11 +56,27 @@ class App extends Component {
             tasks: this.state.tasks.filter(task => task.key !== key)
         })
     }
+    handleCheck(key) {
+        this.setState(({ taks }) => ({
+            tasks: this.state.tasks.map(task => {
+                if (task.key === key) {
+                    task.done = !task.done
+                    if (task.done) {
+                        alert("Sudah beres")
+                    } else {
+                        alert("Belum beres")
+                    }
+                    return task
+                }
+                return task
+            })
+        }))
+    }
 
     render() {
         return (
             <View style={styles.container}>
-                <View>
+                <View style={{ flexDirection: "row" }}>
                     <TextInput
                         placeholder="Add some task"
                         style={styles.input}
@@ -79,14 +95,23 @@ class App extends Component {
                 <FlatList
                     data={this.state.tasks}
                     renderItem={({ item }) => (
-                        <View>
+                        <View style={{ flexDirection: "row" }}>
+                            <CheckBox
+                                value={item.done}
+                                onValueChange={() => this.handleCheck(item.key)}
+                            />
                             <Text style={styles.item}>{item.key}</Text>
                             <Button
                                 style={styles.button}
                                 onPress={() => this.handleDelete(item.key)}
                                 title="delete"
+                                color="darkred"
                             />
-                            {/* <Button title="update" /> */}
+                            <Button
+                                style={styles.button}
+                                onPress={() => this.handleDelete(item.key)}
+                                title="Update"
+                            />
                         </View>
                     )}
                 ></FlatList>
@@ -106,12 +131,13 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 18,
         height: 44,
+        width: "60%",
         borderBottomWidth: 1
+        // margin: 5
     },
     button: {
         height: 50,
-        marginBottom: 30,
-        width: 100,
+        width: "15%",
         alignItems: "center",
         backgroundColor: "#2196F3"
     },
