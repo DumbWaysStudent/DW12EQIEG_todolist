@@ -27,6 +27,7 @@ class App extends Component {
         }
         this.handleAdd = this.handleAdd.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.updateTask = this.updateTask.bind(this)
     }
 
     handleChange(e) {
@@ -76,20 +77,27 @@ class App extends Component {
     }
 
     handleUpdate(key) {
+        if (!this.state.update) {
+            this.handleChange(key)
+        } else {
+            this.handleChange("")
+        }
         this.setState({
             update: !this.state.update,
             updateKey: key
         })
-        this.handleChange(key)
     }
 
     updateTask() {
-        alert(this.state.updateKey)
         if (this.state.text !== "") {
             this.setState(({ taks }) => ({
                 tasks: this.state.tasks.map(task => {
                     if (task.key === this.state.updateKey) {
-                        // alert("updated")
+                        task.key = this.state.text
+                        this.handleChange("")
+                        this.state.update = false
+                        this.state.updateKey = ""
+                        alert("berhasil diubah")
                         return task
                     }
                     return task
@@ -113,7 +121,7 @@ class App extends Component {
                     {this.state.update === true ? (
                         <Button
                             style={styles.button}
-                            // onPress={this.updateTask}
+                            onPress={this.updateTask}
                             title="update"
                         />
                     ) : (
